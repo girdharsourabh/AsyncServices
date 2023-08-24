@@ -14,12 +14,19 @@ public class JobController {
         this.jobLauncher = jobLauncher;
     }
 
+    private static String jobStartedMessage(int id) {
+        return "Job started for id :: " + id;
+    }
+
+    private static String alreadyProcessingMessage(int id) {
+        return "Already Processing job with id: " + id;
+    }
+
     @GetMapping("/{id}")
-    public String getJobStatus(@PathVariable int id){
+    public String getJobStatus(@PathVariable int id) {
         return jobLauncher.getExecutorById(id).map(JobLauncher.JobExecutor::getStatus)
                 .orElse("Job with id: " + id + " not found");
     }
-
 
     @PostMapping("/async")
     public String startJobAsync(@RequestBody JobRequest request) {
@@ -30,13 +37,5 @@ public class JobController {
 
         jobLauncher.runAsync(id, () -> jobService.longRunningJob(request));
         return jobStartedMessage(id);
-    }
-
-    private static String jobStartedMessage(int id) {
-        return "Job started for id :: " + id;
-    }
-
-    private static String alreadyProcessingMessage(int id) {
-        return "Already Processing job with id: " + id;
     }
 }

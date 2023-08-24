@@ -11,9 +11,9 @@ public class JobService {
 
     private static final Random random = new Random();
 
-    int longRunningJob(JobRequest request){
+    int longRunningJob(JobRequest request) {
         int sum = 0;
-        for (int i = 0; i <10 ; i++){
+        for (int i = 0; i < 10; i++) {
             safeSleep();
             sum++;
             log.info("Hello from job id :: " + request.jobId() +

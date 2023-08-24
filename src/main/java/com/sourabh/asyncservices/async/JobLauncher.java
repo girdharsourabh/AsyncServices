@@ -30,8 +30,8 @@ public class JobLauncher {
 
     public static class JobExecutor {
         private final int id;
-        private String status;
         private final Supplier<Integer> supplier;
+        private String status;
         private Future<Integer> cf1;
 
         private JobExecutor(final int id, final Supplier<Integer> supplier) {
@@ -46,7 +46,7 @@ public class JobLauncher {
         }
 
         public String getStatus() {
-            if (cf1 != null && cf1.isDone()){
+            if (cf1 != null && cf1.isDone()) {
                 log.info("Status is finished :: " + Thread.currentThread().getName());
                 status = "Job with id: " + id + "finished with result " + safeGetFuture();
                 jobExecutors.remove(id);

@@ -1,5 +1,5 @@
 package com.sourabh.asyncservices.async;
 
-    public record JobRequest(int jobId){
+public record JobRequest(int jobId) {
 
 }
